@@ -87,7 +87,7 @@ def save_allowed_ips(allowed_ips):
         
 def load_allowed_ips():
     try:
-        with open("allowed_ips", "r", encoding="utf-8") as f:
+        with open("allowed_ips.json", "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
         return [
@@ -98,5 +98,5 @@ def load_allowed_ips():
 # 로그 파일 초기화 함수
 def clear_logs():
     with open("logs.json", "w", encoding="utf-8") as f:
-        json.dump([], f)
+        json.dump([], f, ensure_ascii=False, indent=2)
         
