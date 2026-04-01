@@ -17,7 +17,7 @@ def main():
     
     
     while True:
-        print("1.로그 초기화\n2.테스트 함수 실행\n3.로그 출력\n4.로그 직접 입력\n5.허용 IP 추가\n6.허용 IP 목록 보기\n7.종료") 
+        print("1.로그 초기화\n2.테스트 함수 실행\n3.로그 출력\n4.로그 직접 입력\n5.허용 IP 추가\n6.허용 IP 삭제\n7.허용 IP 목록 보기\n8.종료") 
         
         try:
             user_input = int(input("입력: "))
@@ -63,10 +63,18 @@ def main():
                 print(f"허용 IP가 추가되었습니다.")
                 print(f"[추가된 허용 IP: {new_ip}]")
         elif user_input == 6:
+            del_ip = input("삭제할 허용 IP: ")
+            if del_ip not in allowed_ips:
+                print("등록되어 있지 않은 IP입니다.")
+            else:
+                allowed_ips.remove(del_ip)
+                save_allowed_ips(allowed_ips)
+                print(f"IP:[{del_ip}] 가 삭제되었습니다.")
+        elif user_input == 7:
             print("[허용 IP 목록]")
             for i, ip in enumerate(allowed_ips, start=1):
                 print(f"{i}. {ip}")
-        elif user_input == 7:
+        elif user_input == 8:
             save_logs(log_list)
             print("로그를 저장하고 종료합니다.")
             break
