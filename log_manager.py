@@ -100,3 +100,18 @@ def clear_logs():
     with open("logs.json", "w", encoding="utf-8") as f:
         json.dump([], f, ensure_ascii=False, indent=2)
         
+def is_valid_ip(ip):
+    parts = ip.split(".")
+    
+    if len(parts) != 4:
+        return False
+    
+    for part in parts:
+        if not part.isdigit():
+            return False
+        
+        number = int(part)
+        if number < 0 or number > 255:
+            return False
+        
+    return True

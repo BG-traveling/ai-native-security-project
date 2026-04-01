@@ -1,4 +1,4 @@
-from log_manager import save_allowed_ips, load_allowed_ips, clear_logs, add_login_log, print_logs, load_logs, save_logs
+from log_manager import is_valid_ip, save_allowed_ips, load_allowed_ips, clear_logs, add_login_log, print_logs, load_logs, save_logs
 
 
 # 실행 테스트 함수
@@ -38,9 +38,24 @@ def main():
             print("=" * 30)
             print_logs(log_list)
         elif user_input == 4:
-            user_id = input("사용자 ID: ")
-            ip = input("IP: ")
-            target = input("접속 대상: ")
+            while True:
+                user_id = input("사용자 ID: ").strip()
+                if user_id:
+                    break
+                else:
+                    print("사용자 ID는 비워둘 수 없습니다.")
+            while True:
+                ip = input("IP: ")
+                if is_valid_ip(ip):
+                    break
+                else:
+                    print("올바른 IP 형식이 아닙니다.")
+            while True:
+                target = input("접속 대상: ").strip()
+                if target:
+                    break
+                else:
+                    print("접속 대상 정보는 비워둘 수 없습니다.")
             while True:
                 status = input("결과 (Success/Fail): ")
                 if status in ["Success", "Fail"]:
@@ -53,8 +68,15 @@ def main():
             
             print("로그가 추가되었습니다.")
         elif user_input == 5:
-            new_ip = input("추가할 허용 IP: ")
-            
+            while True:
+                
+                new_ip = input("추가할 허용 IP: ")
+
+                if is_valid_ip(new_ip):
+                    break
+                else:
+                    print("올바른 IP 형식이 아닙니다.")
+                
             if new_ip in allowed_ips:
                 print("이미 등록된 허용 IP입니다.")
             else:
