@@ -80,12 +80,9 @@ def load_logs():
             return json.load(f)
     except FileNotFoundError:
         return []
-    
-# 실행 테스트 함수
-def run_test_logs(log_list, allowed_ips):
-    add_login_log(log_list, "admin", "192.168.10.1", "DB_SERVER_1", "Success", allowed_ips)
-    add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-    add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-    add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-    add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-    add_login_log(log_list, "admin3", "192.168.10.4", "DB_SERVER_1", "Success", allowed_ips)
+
+# 로그 파일 초기화 함수
+def clear_logs():
+    with open("logs.json", "w", encoding="utf-8") as f:
+        json.dump([], f)
+        
