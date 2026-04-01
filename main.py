@@ -1,22 +1,27 @@
-from log_manager import add_login_log, print_log, print_logs
+from log_manager import run_test_logs, add_login_log, print_log, print_logs, load_logs, save_logs
 
-log_list = []
+def main():
+    log_list = load_logs()
 
-allowed_ips = [
-    "192.168.10.1",
-    "192.168.10.2"
-]
+    allowed_ips = [
+        "192.168.10.1",
+        "192.168.10.2"
+    ]
+    
+    RUN_TEST_LOGS = True
+    
+    if RUN_TEST_LOGS:
+        run_test_logs(log_list, allowed_ips)
+        
+    print_logs(log_list)
+    save_logs(log_list)
 
-# 테스트
-add_login_log(log_list, "admin", "192.168.10.1", "DB_SERVER_1", "Success", allowed_ips)
-add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-add_login_log(log_list, "admin2", "192.168.10.2", "DB_SERVER_1", "Success", allowed_ips)
-add_login_log(log_list, "admin3", "192.168.10.4", "DB_SERVER_1", "Success", allowed_ips)
+if __name__ == "__main__":
+    main()
 
-print_logs(log_list)
-print_log(log_list[0])
     
 # result = detect_excessive_login(log_list, user_id="admin2")
 # print(result)
+
+
+    
